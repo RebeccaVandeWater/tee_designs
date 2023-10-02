@@ -11,7 +11,7 @@ const CameraRig = ({ children }) => {
   // Making mobile friendly
   useFrame((state, delta) => {
     const isBreakpoint = window.innerWidth <= 1260;
-    const isMobile = window.innerWidth <= 600;
+    const isMobile = window.innerWidth <= 768;
 
     let targetPosition = [-0.4, 0, 2];
 
@@ -19,12 +19,12 @@ const CameraRig = ({ children }) => {
       if(isBreakpoint) targetPosition = [0, 0, 2];
       if(isMobile) targetPosition = [0, 0.2, 2.5];
     } else {
-      if(isMobile) targetPosition [0, 0, 2.5];
+      if(isMobile) targetPosition [0, 0, 2];
       else targetPosition = [0, 0, 2];
     }
 
     // Setting camera angle
-    easing.damp3(state.camera.position, targetPosition, 0.25, delta)
+    easing.damp3(state.camera.position, targetPosition, 0.1, delta)
 
     easing.dampE(
       group.current.rotation,
@@ -35,9 +35,7 @@ const CameraRig = ({ children }) => {
   })
 
 
-  return (
-    <group ref={group}>{children}</group>
-  )
+  return <group ref={group}>{children}</group>
 }
 
 export default CameraRig
